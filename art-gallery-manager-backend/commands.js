@@ -4,6 +4,7 @@ const { prompt } = require('inquirer');
 
 const {
   reverse,
+  csvToJSON2,
   csvToJSON
 } = require('./index');
 
@@ -31,8 +32,8 @@ program
   .option('-n, --nameJSON', 'Name of output file')
   .option('-f, --fileCSV', 'Input file')
   .action(function (cmdObj) {
-    const  [nameJSON, fileCSV] = cmdObj.args;
-    csvToJSON(nameJSON, fileCSV);
+    const [nameJSON, fileCSV] = cmdObj.args;
+    csvToJSON2(nameJSON, fileCSV);
   })
 
 
