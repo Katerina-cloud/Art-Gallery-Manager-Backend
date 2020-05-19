@@ -1,12 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const cors = require("cors");
 const tourRouter = require("./routes/inventory");
 
 const app = express();
 
 // 1) MIDDLEWARES
 app.use(express.json());
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {

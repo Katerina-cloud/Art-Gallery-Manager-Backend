@@ -92,6 +92,37 @@ exports.createInventoryPiece = (req, res) => {
 };
 
 exports.updateInventoryPiece = (req, res) => {
+  const id = Number(req.params.id);
+  const inventoryPiece = inventory.find(el => el.id === id);
+
+  // fs.writeFile(
+  //   `${__dirname}/dev-data/data/inventory.json`,
+  //   JSON.stringify(inventory),
+  //   () => {
+  //     res.status(201).json({
+  //       status: "success",
+  //       data: {
+  //         inventoryPiece: newInventoryPiece
+  //       }
+  //     });
+  //   }
+  // );
+
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < inventory.length; i++) {
+    if (inventory[i].id === req.body.id) {
+      inventory[i] = { ...req.body };
+      return inventory[i];
+    }
+  }
+
+  if (!inventoryPiece) {
+    return res.status(404).json({
+      status: "fail",
+      message: "Invalid id"
+    });
+  }
+
   res.status(200).json({
     status: "success",
     data: {
@@ -112,10 +143,6 @@ exports.deleteInventoryPiece = (req, res) => {
   }
   const inventoryPieceIndex = inventory.indexOf(inventoryPiece);
   inventory.splice(inventoryPieceIndex, 1);
-  res.status(204).json({
-    status: "success",
-    data: null
-  });
 
   res.status(204).json({
     status: "success",
