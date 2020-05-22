@@ -1,16 +1,17 @@
 [
   {
-    "id": 1,
+    "imageId": 1,
     "title": "Water Lilies",
     "artist": "Claude Monet",
     "medium": "oil on canvas",
     "status": "available",
     "purchaseDate": "2020-02-19T20:13:24.407Z",
     "retailPrice": 3000000,
-    "boughtFrom": "Gallery LLC"
+    "boughtFrom": "Gallery LLC",
+    "createdAt":"2020-05-22T20:13:24.407Z"
   },
   {
-    "id": 2,
+    "imageId": 2,
     "title": "Blue Dancers",
     "artist": "Edgar Degas",
     "medium": "pastel on paper",
@@ -19,10 +20,11 @@
     "customer": "GMG Gallery",
     "retailPrice": 3000000,
     "purchaseDate": "2020-02-19T20:13:24.407Z",
-    "boughtFrom": "Gallery LLC"
+    "boughtFrom": "Gallery LLC",
+    "createdAt":"2020-05-22T20:13:24.407Z"
   },
   {
-    "id": 3,
+    "imageId": 3,
     "title": "The Demon Seated",
     "artist": "Mikhail Vrubel",
     "medium": "oil on canvas",
@@ -32,76 +34,84 @@
     "boughtFrom": "Gallery LLC",
     "loanStartDate": "2020-03-19T20:13:24.407Z",
     "loanEndDate": "2020-04-19T20:13:24.407Z",
-    "customer": "GMG Gallery"
+    "customer": "GMG Gallery",
+    "createdAt":"2020-05-22T20:13:24.407Z"
   },
   {
-    "id": 4,
+    "imageId": 4,
     "title": "Swan Princess",
     "artist": "Mikhail Vrubel",
     "medium": "oil on canvas",
     "status": "available",
     "retailPrice": 3000000,
     "purchaseDate": "2020-02-19T20:13:24.407Z",
-    "boughtFrom": "Gallery LLC"
+    "boughtFrom": "Gallery LLC",
+    "createdAt":"2020-05-22T20:13:24.407Z"
   },
   {
-    "id": 5,
+    "imageId": 5,
     "title": "Faust",
     "artist": "Mikhail Vrubel",
     "medium": "oil on canvas",
     "status": "available",
     "retailPrice": 3000000,
     "purchaseDate": "2020-02-19T20:13:24.407Z",
-    "boughtFrom": "Gallery LLC"
+    "boughtFrom": "Gallery LLC",
+    "createdAt":"2020-05-22T20:13:24.407Z"
   },
   {
-    "id": 6,
+    "imageId": 6,
     "artist": "Gustav Klimt",
     "title": "Portrait of Adele Bloch-Bauer I",
     "medium": "oil on canvas",
     "status": "available",
     "retailPrice": 3000000,
     "purchaseDate": "2020-02-19T20:13:24.407Z",
-    "boughtFrom": "Gallery LLC"
+    "boughtFrom": "Gallery LLC",
+    "createdAt":"2020-05-22T20:13:24.407Z"
   },
   {
-    "id": 7,
+    "imageId": 7,
     "artist": "Gustav Klimt",
     "title": "The Kiss",
     "medium": "oil on canvas",
     "status": "available",
     "retailPrice": 3000000,
     "purchaseDate": "2020-02-19T20:13:24.407Z",
-    "boughtFrom": "Gallery LLC"
+    "boughtFrom": "Gallery LLC",
+    "createdAt":"2020-05-22T20:13:24.407Z"
   },
   {
-    "id": 8,
+    "imageId": 8,
     "artist": "Claude Monet",
     "title": "Woman with a Parasol",
     "medium": "oil on canvas",
     "status": "available",
     "retailPrice": 3000000,
     "purchaseDate": "2020-02-19T20:13:24.407Z",
-    "boughtFrom": "Gallery LLC"
+    "boughtFrom": "Gallery LLC",
+    "createdAt":"2020-05-22T20:13:24.407Z"
   },
   {
-    "id": 9,
+    "imageId": 9,
     "artist": "Vincent van Gogh",
     "title": "The Starry Night",
     "medium": "oil on canvas",
     "status": "available",
     "purchaseDate": "2020-02-19T20:13:24.407Z",
     "boughtFrom": "Gallery LLC",
-    "retailPrice": 3000000
+    "retailPrice": 3000000,
+    "createdAt":"2020-05-22T20:13:24.407Z"
   },
   {
-    "id": 10,
+    "imageId": 10,
     "artist": "Unknown",
     "title": "Flowers",
     "medium": "oil on canvas",
     "status": "available",
     "purchaseDate": "2020-02-19T20:13:24.407Z",
     "boughtFrom": "Gallery LLC",
-    "retailPrice": 3000000
+    "retailPrice": 3000000,
+    "createdAt":"2020-05-22T20:13:24.407Z"
   }
 ]

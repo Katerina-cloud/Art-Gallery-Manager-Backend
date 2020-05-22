@@ -1,12 +1,12 @@
-const express = require("express");
-const inventoryController = require("../controllers/inventoryController");
+const express = require('express');
+const inventoryController = require('../controllers/inventoryController');
 
 const router = express.Router();
 
 // router.param("id", inventoryController.checkID);
 
 router
-  .route("/")
+  .route('/')
   .get((req, res) => {
     if (req.query.pieceTitle) {
       inventoryController.getInventoryPieceByTitle(req, res);
@@ -17,7 +17,7 @@ router
   .post(inventoryController.createInventoryPiece);
 
 router
-  .route("/:id")
+  .route('/:id')
   .get(inventoryController.getInventoryPieceById)
   .patch(inventoryController.updateInventoryPiece)
   .delete(inventoryController.deleteInventoryPiece);
