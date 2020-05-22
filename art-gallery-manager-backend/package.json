@@ -6,7 +6,8 @@
   "preferGlobal": true,
   "bin": "./commands.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "start:prod": "NODE_ENV=production server.js",
     "eslint": "eslint --max-warnings 0 *.js"
   },
   "keywords": [],
@@ -31,6 +32,10 @@
     "csvtojson": "^2.0.10",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "inquirer": "^7.1.0"
+    "inquirer": "^7.1.0",
+    "mongoose": "^5.9.15"
+  }, 
+  "engines": {
+    "node": ">=10.0.0"
   }
 }

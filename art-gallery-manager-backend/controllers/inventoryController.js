@@ -1,151 +1,130 @@
-const fs = require("fs");
+const Piece = require("../models/Piece");
 
-const inventory = JSON.parse(
-  fs.readFileSync(`${__dirname}/../dev-data/data/inventory.json`)
-);
+exports.getAllInventory = async (req, res) => {
+  try {
+    const inventory = await Piece.find();
 
-exports.checkID = (req, res, next, val) => {
-  console.log(`InventoryPiece id is: ${val}`);
-
-  if (Number(req.params.id) > inventory.length) {
-    return res.status(404).json({
+    res.status(200).json({
+      status: "success",
+      results: inventory.length,
+      data: {
+        inventory
+      }
+    });
+  } catch (err) {
+    res.status(404).json({
       status: "fail",
-      message: "Invalid ID"
+      message: err
     });
   }
-  next();
 };
 
-exports.checkBody = (req, res, next) => {
-  if (!req.body.name || !req.body.price) {
-    return res.status(400).json({
+exports.getInventoryPieceById = async (req, res) => {
+  try {
+    const inventoryPiece = await Piece.findById(req.params.id);
+    // Piece.findOne({_id!!!!: req.params.id})
+    res.status(200).json({
+      status: "success",
+      data: {
+        inventoryPiece
+      }
+    });
+  } catch (err) {
+    res.status(404).json({
       status: "fail",
-      message: "Missing name or price"
+      message: err
     });
   }
-  next();
-};
-
-exports.getAllInventory = (req, res) => {
-  console.log(req.requestTime);
-
-  res.status(200).json({
-    status: "success",
-    requestedAt: req.requestTime,
-    results: inventory.length,
-    data: {
-      inventory
-    }
-  });
-};
-
-exports.getInventoryPieceById = (req, res) => {
-  const id = Number(req.params.id);
-
-  const inventoryPiece = inventory.find(el => el.id === id);
-
-  res.status(200).json({
-    status: "success",
-    data: {
-      inventoryPiece
-    }
-  });
 };
 
 exports.getInventoryPieceByTitle = (req, res) => {
-  const { pieceTitle } = req.query;
-
-  const filteredInventory = inventory.filter(piece => {
-    if (piece.title.toLowerCase().includes(pieceTitle.toLowerCase())) {
-      return piece;
-    }
-  });
-
-  res.status(200).json({
-    status: "success",
-    data: {
-      filteredInventory
-    }
-  });
+  // const { pieceTitle } = req.query;
+  // // const filteredInventory = inventory.filter(piece => {
+  // //   if (piece.title.toLowerCase().includes(pieceTitle.toLowerCase())) {
+  // //     return piece;
+  // //   }
+  // // });
+  // // res.status(200).json({
+  // //   status: "success",
+  // //   data: {
+  // //     filteredInventory
+  // //   }
+  // // });
 };
 
-exports.createInventoryPiece = (req, res) => {
-  // console.log(req.body);
+exports.createInventoryPiece = async (req, res) => {
+  try {
+    console.log("req.body:", req.body);
+    const newInventoryPiece = await Piece.create(req.body);
 
-  const newId = inventory[inventory.length - 1].id + 1;
-  const newInventoryPiece = Object.assign({ id: newId }, req.body);
-
-  inventory.push(newInventoryPiece);
-
-  fs.writeFile(
-    `${__dirname}/dev-data/data/inventory.json`,
-    JSON.stringify(inventory),
-    () => {
-      res.status(201).json({
-        status: "success",
-        data: {
-          inventoryPiece: newInventoryPiece
-        }
-      });
-    }
-  );
-};
-
-exports.updateInventoryPiece = (req, res) => {
-  const id = Number(req.params.id);
-  const inventoryPiece = inventory.find(el => el.id === id);
-
-  // fs.writeFile(
-  //   `${__dirname}/dev-data/data/inventory.json`,
-  //   JSON.stringify(inventory),
-  //   () => {
-  //     res.status(201).json({
-  //       status: "success",
-  //       data: {
-  //         inventoryPiece: newInventoryPiece
-  //       }
-  //     });
-  //   }
-  // );
-
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < inventory.length; i++) {
-    if (inventory[i].id === req.body.id) {
-      inventory[i] = { ...req.body };
-      return inventory[i];
-    }
+    res.status(201).json({
+      status: "success",
+      data: {
+        inventoryPiece: newInventoryPiece
+      }
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err
+    });
   }
+};
 
-  if (!inventoryPiece) {
+exports.updateInventoryPiece = async (req, res) => {
+  try {
+    // const id = Number(req.params.id);
+    // const inventoryPiece = inventory.find(el => el.id === id);
+    console.log("req.body patch:", req.body);
+    const inventoryPiece = await Piece.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true
+      }
+    );
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        inventoryPiece
+      }
+    });
+  } catch (err) {
+    return res.status(404).json({
+      status: "fail",
+      message: "Invalid id"
+    });
+  }
+};
+
+exports.deleteInventoryPiece = async (req, res) => {
+  try {
+    await Piece.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      status: "success",
+      data: null
+    });
+  } catch (err) {
     return res.status(404).json({
       status: "fail",
       message: "Invalid id"
     });
   }
 
-  res.status(200).json({
-    status: "success",
-    data: {
-      inventoryPiece: "<Updated inventoryPiece here...>"
-    }
-  });
-};
-
-exports.deleteInventoryPiece = (req, res) => {
-  const id = Number(req.params.id);
-  const inventoryPiece = inventory.find(el => el.id === id);
-
-  if (!inventoryPiece) {
-    return res.status(404).json({
-      status: "fail",
-      message: "Invalid id"
-    });
-  }
-  const inventoryPieceIndex = inventory.indexOf(inventoryPiece);
-  inventory.splice(inventoryPieceIndex, 1);
-
-  res.status(204).json({
-    status: "success",
-    data: null
-  });
+  // const id = Number(req.params.id);
+  // // const inventoryPiece = inventory.find(el => el.id === id);
+  // if (!inventoryPiece) {
+  //   return res.status(404).json({
+  //     status: "fail",
+  //     message: "Invalid id"
+  //   });
+  // }
+  // const inventoryPieceIndex = inventory.indexOf(inventoryPiece);
+  // inventory.splice(inventoryPieceIndex, 1);
+  // res.status(204).json({
+  //   status: "success",
+  //   data: null
+  // });
 };

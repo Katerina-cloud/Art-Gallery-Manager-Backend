@@ -3,7 +3,7 @@ const inventoryController = require("../controllers/inventoryController");
 
 const router = express.Router();
 
-router.param("id", inventoryController.checkID);
+// router.param("id", inventoryController.checkID);
 
 router
   .route("/")
@@ -14,10 +14,7 @@ router
       inventoryController.getAllInventory(req, res);
     }
   })
-  .post(
-    inventoryController.checkBody,
-    inventoryController.createInventoryPiece
-  );
+  .post(inventoryController.createInventoryPiece);
 
 router
   .route("/:id")
