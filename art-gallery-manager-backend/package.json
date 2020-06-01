@@ -8,12 +8,16 @@
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "NODE_ENV=production server.js",
-    "eslint": "eslint --max-warnings 0 *.js"
+    "eslint": "eslint --max-warnings 0 *.js",
+    "test": "mocha controllers/inventoryController.test.js",
+    "coverage": "nyc npm run test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.1.0",
@@ -22,8 +26,11 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
+    "mocha": "^7.2.0",
+    "nodemon": "^2.0.3",
+    "nyc": "^15.0.1",
     "prettier": "^1.17.0",
-    "nodemon": "^2.0.3"
+    "sinon": "^9.0.2"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -43,6 +50,7 @@
     "passport": "^0.4.1",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
+    "save-dev": "0.0.1-security",
     "validator": "^13.0.0"
   },
   "engines": {
