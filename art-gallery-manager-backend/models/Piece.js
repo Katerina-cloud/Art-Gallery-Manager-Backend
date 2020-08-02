@@ -68,6 +68,7 @@ const pieceSchema = new Schema({
   }
 });
 
+// replace _id by id
 pieceSchema.method('toJSON', function() {
   const { _id, ...object } = this.toObject();
   object.id = _id;

@@ -1,14 +1,15 @@
 const Piece = require('../models/Piece');
+const APIFeatures = require('../utils/apiFeatures');
 
 exports.getAllInventory = async (req, res) => {
   try {
-    const queryObj = { ...req.query };
-    const excludedFields = ['page', 'sort', 'limit', 'fileds'];
-    excludedFields.forEach(el => delete queryObj[el]);
-
-    console.log(req.query, queryObj);
-    const inventory = await Piece.find(queryObj);
-
+    //execute query
+    const features = new APIFeatures(Piece.find(), req.query)
+      .filter()
+      .sort()
+      .paginate();
+    const inventory = await features.query;
+    //send response
     res.status(200).json({
       status: 'success',
       results: inventory.length,
